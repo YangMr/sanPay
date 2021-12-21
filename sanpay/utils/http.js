@@ -14,7 +14,7 @@ class Http{
             data
         })
         if(res.statusCode < 400){
-            return res.data.data
+            return res.data
         }
         if(res.statusCode === 401){
             //TODO

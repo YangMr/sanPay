@@ -2,7 +2,8 @@
   "pages": [
     "pages/shopping/shopping",
     "pages/product/product",
-    "pages/personal/personal"
+    "pages/personal/personal",
+    "pages/cart/cart"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -10,28 +11,28 @@
     "navigationBarTitleText": "扫码购",
     "navigationBarTextStyle": "white"
   },
-  "tabBar" : {
-    "color" : "#333",
-    "selectedColor" : "#f60",
-    "backgroundColor" : "#fff",
-    "list" : [
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#f60",
+    "backgroundColor": "#fff",
+    "list": [
       {
-        "pagePath" : "pages/shopping/shopping",
-        "text" : "扫码购物",
-        "iconPath" : "/assets/images/index02.png",
-        "selectedIconPath" : "/assets/images/index01.png"
+        "pagePath": "pages/shopping/shopping",
+        "text": "扫码购物",
+        "iconPath": "/assets/images/index02.png",
+        "selectedIconPath": "/assets/images/index01.png"
       },
       {
-        "pagePath" : "pages/product/product",
-        "text" : "每日优选",
-        "iconPath" : "/assets/images/product02.png",
-        "selectedIconPath" : "/assets/images/product01.png"
+        "pagePath": "pages/product/product",
+        "text": "每日优选",
+        "iconPath": "/assets/images/product02.png",
+        "selectedIconPath": "/assets/images/product01.png"
       },
       {
-        "pagePath" : "pages/personal/personal",
-        "text" : "个人中心",
-        "iconPath" : "/assets/images/user02.png",
-        "selectedIconPath" : "/assets/images/user01.png"
+        "pagePath": "pages/personal/personal",
+        "text": "个人中心",
+        "iconPath": "/assets/images/user02.png",
+        "selectedIconPath": "/assets/images/user01.png"
       }
     ]
   },
