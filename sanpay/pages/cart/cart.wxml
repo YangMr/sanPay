@@ -1,1 +1,2 @@
-<view>购物车</view>
+<view wx:if="{{carts.length > 0}}">有数据的页面</view>
+<my-empty-cart wx:else></my-empty-cart>

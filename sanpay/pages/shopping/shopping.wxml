@@ -3,9 +3,34 @@
         <my-swiper avatar="{{avatar}}"></my-swiper>
     </view>
     <view class="qrcode-button">
-        <view class="button" bindtap="handleQrcode">
-            <image src="../../assets/images/qrcode.png"></image>
-            <text>请扫描商品条形码</text>
-        </view>
+        <my-button type="circle" bindGetQrcode="getQrcode"></my-button>
     </view>
 </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--        <view class="Button" bindtap="handleQrcode">-->
+        <!--            <image src="../../assets/images/qrcode.png"></image>-->
+        <!--            <text>请扫描商品条形码</text>-->
+        <!--        </view>-->

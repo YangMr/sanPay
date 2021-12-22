@@ -17,26 +17,3 @@
 .container .qrcode-button{
     flex : 1;
 }
-.container .button{
-    width : 300rpx;
-    height : 300rpx;
-    background : #F5BA47;
-    border-radius: 50%;
-    border:20rpx solid #FCE9BC;
-    display: flex;
-    flex-direction : column;
-    align-items : center;
-    justify-content : center;
-    margin: 80rpx auto 0;
-}
-.container .button image{
-    width : 158rpx;
-    height : 128rpx;
-}
-.container .button text{
-    color : #fff;
-    display : inline-block;
-    width : 190rpx;
-    text-align : center;
-    margin-top : 10rpx;
-}

@@ -1,45 +1,24 @@
 // pages/shopping/shopping.js
 import ProductionModel from "../../model/production";
 import {navigateTo} from "../../utils/wxApi"
+import storage from "../../utils/storage";
+import carts from "../../common/carts";
 Page({
   /**
    * 点击按钮开启扫描条形码
    */
-  async handleQrcode(){
-    //获取到所扫码商品的条形码
-    let {result} = await this.scanCodePromise()
-
-    //如果所扫码商品的条形码不存在或者有问题我门则不继续往下执行
-    if(!result) return;
-
-    //通过扫码商品的条形码获取到对应商品的信息
-    let res = await ProductionModel.getProduction(result)
-
-    //判断如果通过条形码获取到了商品信息，则跳转到购物车页面
-    if(res.result && res.result.length > 0){
-      navigateTo("/pages/cart/cart")
-    }
-
-  },
-
+  getQrcode : carts.getQrcode,
   /**
-   * 将扫码方法进行promise化
-   * @returns {Promise<unknown>}
+   * 将获取到的商品数据存储到本地
+   * @param data
    */
-  scanCodePromise(){
-    return new Promise((resolve, reject)=>{
-      wx.scanCode({
-        success : (res)=> {
-          resolve(res)
-        },
-        fail(err) {
-          reject(err)
-        }
-      })
-    })
-  },
-
-
+  addCart : carts.addCart,
+  /**
+   * 要添加的商品信息 在 所有的商品信息 里面是否存在  存在 true 不存在false
+   * @param data
+   * @param carts
+   */
+  hasProduction : carts.hasProduction,
 
   /**
    * 页面的初始数据
@@ -67,7 +46,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
 

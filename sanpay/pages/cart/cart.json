@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "my-empty-cart" : "../../components/EmptyCartPage/index"
+  },
   "navigationBarTitleText":"购物车"
 }

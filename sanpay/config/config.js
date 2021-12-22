@@ -7,7 +7,8 @@
  * 封装请求的公共接口地址以及公共的参数
  */
 const ApiConfig = {
-    baseURL : "http://weixin.itying.com"
+    baseURL : "http://weixin.itying.com",
+    namespace : "wx"
 }
 
 export default  ApiConfig
