@@ -17,9 +17,18 @@
             总计: <text>¥{{result}}</text>
         </view>
         <view class="button-group">
-            <view class="button add">继续添加</view>
-            <view class="button computed">去结算 ({{totalNum}}) </view>
+            <my-button type="add" bindGetQrcode="getQrcode"></my-button>
+            <view class="button computed" bindtap="doOrder">去结算 ({{totalNum}}) </view>
         </view>
     </view>
 </view>
 <my-empty-cart wx:else></my-empty-cart>
+
+
+
+
+
+
+
+
+        <!--            <view class="button add">继续添加</view>-->

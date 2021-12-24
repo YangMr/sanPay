@@ -4,3 +4,5 @@
 </view>
 
 <view wx:if="{{type == 'rectangle'}}" class="cart-button" bindtap="handleQrcode">扫一扫条形码</view>
+
+<view wx:if="{{type == 'add'}}" bindtap="handleQrcode" class="add">继续添加</view>

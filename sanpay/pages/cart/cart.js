@@ -1,7 +1,19 @@
 // pages/cart/cart.js
 import storage from "../../utils/storage";
 import carts from "../../common/carts";
+import {navigateTo} from "../../utils/wxApi"
 Page({
+  getQrcode : carts.getQrcode,
+  addCart : carts.addCart,
+  hasProduction : carts.hasProduction,
+
+  /**
+   * 跳转到订单页面
+   */
+  doOrder(){
+    navigateTo("/pages/order/order")
+  },
+
   /**
    * 实现商品数量的增加
    * @param event
@@ -84,20 +96,20 @@ Page({
   },
 
   //获取商品总价：  1个商品的总价 = 1个商品的单价 * 1个商品的数量   2
-
-  totalResult(carts){
-    let result = 0
-    let num = 0
-    carts.forEach(item=>{
-      result += ((item.price*10) * item.num)/10
-      num += item.num
-    })
-    result = result.toFixed(1)
-    this.setData({
-      result : result,
-      totalNum : num
-    })
-  },
+  totalResult : carts.totalResult,
+  // totalResult(carts){
+  //   let result = 0
+  //   let num = 0
+  //   carts.forEach(item=>{
+  //     result += ((item.price*10) * item.num)/10
+  //     num += item.num
+  //   })
+  //   result = result.toFixed(1)
+  //   this.setData({
+  //     result : result,
+  //     totalNum : num
+  //   })
+  // },
 
   /**
    * 生命周期函数--监听页面加载

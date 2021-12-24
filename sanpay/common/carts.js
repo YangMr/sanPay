@@ -70,8 +70,27 @@ function hasProduction(data,carts){
     return dataStatus
 }
 
+/**
+ * 获取商品的总价
+ * @param carts
+ */
+function totalResult(carts){
+    let result = 0
+    let num = 0
+    carts.forEach(item=>{
+        result += ((item.price*10) * item.num)/10
+        num += item.num
+    })
+    result = result.toFixed(1)
+    this.setData({
+        result : result,
+        totalNum : num
+    })
+}
+
 export default {
     getQrcode,
     addCart,
-    hasProduction
+    hasProduction,
+    totalResult
 }
