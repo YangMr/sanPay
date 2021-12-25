@@ -31,6 +31,6 @@
         <view class="actual-payment">
             实际支付: <text>¥{{resultPrice}}</text>
         </view>
-        <view class="confirm-payment">确认支付</view>
+        <view class="confirm-payment" bindtap="confirmPay">确认支付</view>
     </view>
 </view>

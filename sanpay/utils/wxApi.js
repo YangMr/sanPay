@@ -10,3 +10,6 @@
 export const navigateTo = (url) =>{
     wx.navigateTo({url})
 }
+export const navigateTabTo = (url) =>{
+    wx.switchTab({url})
+}
