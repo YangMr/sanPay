@@ -26,7 +26,7 @@ class PayModel extends Http{
      * @param data
      * @returns {Promise<*|undefined>}
      */
-    static doOrder(data){
+    static doOrder(data = {}){
         return Http.request({
             url : "/weixinpay/doOrder",
             method : "POST",

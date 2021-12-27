@@ -1,39 +1,84 @@
 // pages/order/order.js
-import storage from "../../utils/storage";
-import production from "../../model/production";
-import carts from "../../common/carts";
-import PayModel from "../../model/pay"
+import storage from "../../utils/storage"
+import production from "../../model/production"
+import carts from "../../common/carts"
+import PayModel from "../../model/pay";
 import {sign} from "../../utils/sign"
+import {navigateTo} from "../../utils/wxApi";
 Page({
-  /**
-   * 确认支付
-   */
+  //点击确定支付按钮触发的方法
   confirmPay(){
+    //调用统一下单方法
     this.handleDoOrder()
   },
 
-  /**
-   * 统一下单方法
-   */
+  //统一下单方法
   async handleDoOrder(){
-    //获取本地存储的用户信息
+    //获取本地保存的openid以及用户信息
     let userinfo = storage.get("userinfo")
-    let {openid,_id,salt} = userinfo
-    let Sign = sign({openid,_id,salt})
-
-    let data = {
+    //调用生成签名的方法
+    let signInfo = sign({
       openid : userinfo.openid,
       uid : userinfo._id,
-      sign : Sign,
-      total_price : this.data.result,
-      total_num : 2,
-      derate_price : 0,
-      real_price : this.data.resultPrice,
+      salt : userinfo.salt
+    })
+    // console.log("sign=>",signInfo)
+    // console.log("openid=>",userinfo.openid)
+    // console.log("uid=>",userinfo._id)
+    // console.log("total_price=>", this.data.result)
+    // console.log("total_num=>", this.data.totalNum)
+    // console.log("derate_price=>", this.data.balance)
+    // console.log("real_price=>", this.data.resultPrice)
+    // console.log("order=>", JSON.stringify(this.data.allCarts))
+
+
+
+
+    //data保存的是统一下单接口所需要的所有参数
+    let data = {
+      openid : userinfo.openid,  //刚才给本地保存了openid以及用户信息  其中就有我门所需要的openid 以及 uid
+      uid :	userinfo._id,
+      sign : signInfo,
+      total_price :	this.data.result,
+      total_num :	this.data.totalNum,
+      derate_price :this.data.balance,
+      real_price :this.data.resultPrice,
       order : JSON.stringify(this.data.allCarts)
     }
 
-    let res =await PayModel.doOrder(data)
-    console.log("res=>",res)
+    //调用统一下单接口，调用成功后后台会给我门返沪支付所需要的参数
+    let res = await PayModel.doOrder(data)
+
+    console.log("pay params =>", res)
+
+    if(!res.success) return
+
+    this.payMent(res.result)
+  },
+
+  //发起支付
+  payMent(payParams){
+    let data = JSON.parse(payParams)
+    console.log(data.timeStamp)
+    wx.requestPayment({
+      "timeStamp": data.timeStamp,
+      "nonceStr": data.nonceStr,
+      "package": data.package,
+      "signType": 'MD5',
+      "paySign": data.paySign,
+      success  : (res)=> {
+        console.log("success=>",res)
+
+        //清空本地购物车的数据
+
+        if(res.errMsg == "requestPayment:ok"){
+          navigateTo("/pages/success/success")
+        }
+      },
+      fail :(err)=> {
+        console.log("err=>",err)
+      }
+    })
   },
 
   /**

@@ -3,28 +3,31 @@ import PayModel from "./model/pay"
 import storage from "./utils/storage";
 App({
   async onLaunch() {
-      //1.当小程序启动的时候,调用wx.login获取小程序的code码
-      let code = await this.getCode()
-      // 2. 获取到小程序的code码之后,调用获取openid接口,获取到openid
-      let res = await PayModel.getOpenid(code)
-      console.log(res)
-      //如果获取不到openid等参数，则不继续往下执行
-      if(!res.success) return
-      //3.将获取到的openid以及其他信息保存到本地
-      storage.set("userinfo",res.userinfo)
+    //调用获取code码方法
+    let code = await this.getCode()
+
+    if(!code) return
+
+    //通过code码获取到openid以及用户相关信息
+    let res = await PayModel.getOpenid(code)
+
+    if(!res && !res.userinfo) return
+
+    //将获取到的openid以及用户信息存储到本地
+    storage.set("userinfo",res.userinfo)
   },
+  //获取code码
   getCode(){
-      return new Promise((resolve, reject)=>{
-          wx.login({
-              success : (res)=>{
-                  if(!res.code) return
-                  resolve(res.code)
-              },
-              fail:(err)=> {
-                  reject(err)
-              }
-          })
+    return new Promise((resolve, reject)=>{
+      wx.login({
+        success : (res)=>{
+          resolve(res.code)
+        },
+        fail : (err)=> {
+          reject(err)
+        }
       })
+    })
   },
   globalData: {
     userInfo: null
